@@ -1,6 +1,5 @@
 package com.udit.sample.playground.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -20,55 +19,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-@Composable
-fun BlockLayout(
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
-) {
-    Layout(
-        modifier = modifier,
-        content = content
-    ) { measurables, constraints ->
-        // Don't constrain child views further, measure them with given constraints
-        // List of measured children
-
-        Log.d("compose", "maxWidth : ${constraints.maxWidth}")
-        Log.d("compose", "minWidth : ${constraints.minWidth}")
-        Log.d("compose", "maxHeight : ${constraints.maxHeight}")
-        Log.d("compose", "minHeight : ${constraints.minHeight}")
-        Log.d("compose", "hasBoundedWidth : ${constraints.hasBoundedWidth}")
-        Log.d("compose", "hasFixedWidth : ${constraints.hasFixedWidth}")
-
-
-        val placeables = measurables.map { measurable ->
-            // Measure each children
-            measurable.measure(constraints).also {
-                Log.d("compose", "child measuredWidth : ${it.measuredWidth}")
-                Log.d("compose", "child width : ${it.width}")
-            }
-        }
-
-
-        // Set the size of the layout as big as it can
-        layout(constraints.maxWidth, constraints.maxHeight) {
-            // Track the y co-ord we have placed children up to
-            var yPosition = 0
-
-            // Place children in the parent layout
-            placeables.forEach { placeable ->
-                // Position item on the screen
-                placeable.placeRelative(x = 0, y = yPosition)
-
-                // Record the y co-ord placed up to
-                yPosition += placeable.height
-            }
-        }
-    }
-}
 
 @Composable
 private fun CompositeBlock(modifier: Modifier = Modifier) {

@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.ParentDataModifier
-import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 
@@ -24,11 +23,8 @@ fun BlockLayout(
     ) { measurables, constraints ->
         // Don't constrain child views further, measure them with given constraints
         // List of measured children
-
-        val constraints1 = BlockLayoutConstraints(constraints)
-
-
-        val rowColumnParentData = Array(measurables.size) { measurables[it].data }
+//        val constraints1 = BlockLayoutConstraints(constraints)
+        val layoutSizeParentData = Array(measurables.size) { measurables[it].data }
 
         Log.d("compose", "maxWidth : ${constraints.maxWidth}")
         Log.d("compose", "minWidth : ${constraints.minWidth}")
@@ -38,11 +34,12 @@ fun BlockLayout(
         Log.d("compose", "hasFixedWidth : ${constraints.hasFixedWidth}")
 
 
-        val placeables = measurables.map { measurable ->
+        val placeables = measurables.mapIndexed { index, measurable ->
             // Measure each children
             measurable.measure(constraints).also {
                 Log.d("compose", "child measuredWidth : ${it.measuredWidth}")
                 Log.d("compose", "child width : ${it.width}")
+                Log.d("compose", "child constraints : ${layoutSizeParentData[index]}")
             }
         }
 
@@ -90,16 +87,16 @@ internal object BlockLayoutScopeInstance : BlockLayoutScope {
     }
 }
 
-internal class BlockLayoutConstraints(
-    val minWidth: Int,
-    val maxWidth: Int,
-    val minHeight: Int,
-    val maxHeight: Int,
-) {
-    constructor(c: Constraints) : this(
-        c.minWidth, c.maxWidth, c.minHeight, c.maxHeight
-    )
-}
+//internal class BlockLayoutConstraints(
+//    val minWidth: Int,
+//    val maxWidth: Int,
+//    val minHeight: Int,
+//    val maxHeight: Int,
+//) {
+//    constructor(c: Constraints) : this(
+//        c.minWidth, c.maxWidth, c.minHeight, c.maxHeight
+//    )
+//}
 
 private val IntrinsicMeasurable.data: LayoutSizeImpl?
     get() = parentData as? LayoutSizeImpl
@@ -125,6 +122,10 @@ internal class LayoutSizeImpl(
         val otherModifier = other as? LayoutSizeImpl ?: return false
         return minWidth != otherModifier.minWidth &&
                 maxWidth != otherModifier.maxWidth
+    }
+
+    override fun toString(): String {
+        return "layout bounds : min = $minWidth dp | max = $maxWidth dp"
     }
 
 }

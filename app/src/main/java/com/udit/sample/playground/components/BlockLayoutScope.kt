@@ -37,9 +37,9 @@ fun BlockLayout(
         val placeables = measurables.mapIndexed { index, measurable ->
             // Measure each children
             measurable.measure(constraints).also {
-                Log.d("compose", "child measuredWidth : ${it.measuredWidth}")
-                Log.d("compose", "child width : ${it.width}")
-                Log.d("compose", "child constraints : ${layoutSizeParentData[index]}")
+                Log.d("compose", "child $index measuredWidth : ${it.measuredWidth}")
+                Log.d("compose", "child $index width : ${it.width}")
+                Log.d("compose", "child $index constraints : ${layoutSizeParentData[index]}")
             }
         }
 

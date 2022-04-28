@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +26,6 @@ import androidx.compose.ui.unit.dp
 private fun CompositeBlock(modifier: Modifier = Modifier) {
     BlockLayout(
         modifier = modifier
-            .fillMaxWidth()
             .background(Color.Gray)
     ) {
         DataBlock2(
@@ -76,7 +74,7 @@ fun DataBlock1() {
 
 @Composable
 fun DataBlock2(modifier: Modifier = Modifier) {
-    Text(text = "Block number 2")
+    Text(text = "Block number 2", modifier = modifier)
 }
 
 @Preview

@@ -1,4 +1,4 @@
-//package com.udit.sample.playground.components
+package com.udit.sample.playground.components.blocks//package com.udit.sample.playground.components
 //
 //import androidx.compose.ui.layout.IntrinsicMeasurable
 //import androidx.compose.ui.layout.IntrinsicMeasureScope

@@ -1,4 +1,4 @@
-package com.udit.sample.playground.components
+package com.udit.sample.playground.components.blocks
 
 import android.util.Log
 import androidx.compose.foundation.background

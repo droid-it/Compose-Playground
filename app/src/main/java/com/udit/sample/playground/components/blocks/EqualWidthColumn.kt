@@ -1,4 +1,4 @@
-package com.udit.sample.playground.components
+package com.udit.sample.playground.components.blocks
 
 import androidx.compose.foundation.background
 import androidx.compose.material.Text
